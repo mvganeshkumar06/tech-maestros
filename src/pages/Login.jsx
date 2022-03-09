@@ -17,7 +17,7 @@ import {
 import { Link as RouterLink } from 'react-router-dom';
 import AppContext from '../context/app-context';
 
-import { fetchLogin } from '../api/Api';
+import { fetchLogin } from '../api/api';
 
 export default function Login() {
 	const { state, dispatch } = useContext(AppContext);

@@ -1,0 +1,23 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container img{
+    width: 80%;
+    height: 60%;
+}
+.container button{
+    padding: 5px 8px;
+    background-color: rgb(160, 138, 180);
+    border-radius: 5px;
+    color: aliceblue;
+}

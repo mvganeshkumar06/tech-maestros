@@ -26,37 +26,43 @@ export default function Login() {
 	const [userType, setUserType] = useState('');
 
 	const handleSubmit = async () => {
-		// dispatch({
-		// 	type: 'SET_IS_LOADING',
-		// 	payload: { login: true },
-		// });
-		// const response = await fetch('https://tech-maestros-api.herokuapp.com/auth/login', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify({
-		// 		registrationNumber: username,
-		// 		password: password,
-		// 		user: userType,
-		// 	}),
-		// 	headers: {
-		// 		'Content-type': 'application/json; charset=UTF-8',
-		// 	},
-		// });
-		// const res = response.json();
-		// localStorage.setItem('accessToken', res.accessToken);
-		// dispatch({
-		// 	type: 'SET_ACCESS_TOKEN',
-		// 	payload: res.accessToken,
-		// });
-		// const user = jwtDecode(res.accessToken);
-		// console.log(state);
-		// dispatch({
-		// 	type: 'SET_USER',
-		// 	payload: user,
-		// });
-		// dispatch({
-		// 	type: 'SET_IS_LOADING',
-		// 	payload: { login: false },
-		// });
+		dispatch({
+			type: 'SET_IS_LOADING',
+			payload: { login: true },
+		});
+		try {
+			const response = await fetch('https://tech-maestros-api.herokuapp.com/auth/login', {
+				method: 'POST',
+				body: JSON.stringify({
+					user: userType,
+					registrationNumber: username,
+					password: password,
+				}),
+				// headers: {
+				// 	'Content-Type': 'application/json',
+				// },
+			});
+			const { accessToken } = await response.json();
+			console.log(accessToken);
+			localStorage.setItem('accessToken', accessToken);
+			dispatch({
+				type: 'SET_ACCESS_TOKEN',
+				payload: accessToken,
+			});
+			const user = jwtDecode(accessToken);
+			console.log(user);
+			dispatch({
+				type: 'SET_USER',
+				payload: user,
+			});
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch({
+				type: 'SET_IS_LOADING',
+				payload: { login: false },
+			});
+		}
 	};
 
 	return (

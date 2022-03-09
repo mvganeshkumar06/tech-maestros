@@ -14,6 +14,7 @@ import {
 	Select,
 	Spinner,
 } from '@chakra-ui/react';
+import axios from 'axios';
 import { Link as RouterLink, useHistory } from 'react-router-dom';
 import AppContext from '../context/app-context';
 import jwtDecode from 'jwt-decode';
@@ -21,7 +22,7 @@ import jwtDecode from 'jwt-decode';
 export default function Login() {
 	const { state, dispatch } = useContext(AppContext);
 	const history = useHistory();
-	const [username, setUsername] = useState('');
+	const [registrationNumber, setRegistrationNumber] = useState('');
 	const [password, setPassword] = useState('');
 	const [userType, setUserType] = useState('');
 
@@ -31,30 +32,27 @@ export default function Login() {
 			payload: { login: true },
 		});
 		try {
-			const response = await fetch('https://tech-maestros-api.herokuapp.com/auth/login', {
-				method: 'POST',
-				body: JSON.stringify({
+			const response = await axios({
+				method: 'post',
+				url: 'https://tech-maestros-api.herokuapp.com/auth/login',
+				data: {
 					user: userType,
-					registrationNumber: username,
+					registrationNumber: registrationNumber,
 					password: password,
-				}),
-				// headers: {
-				// 	'Content-Type': 'application/json',
-				// },
+				},
 			});
-			const { accessToken } = await response.json();
-			console.log(accessToken);
+			const { accessToken } = response.data;
 			localStorage.setItem('accessToken', accessToken);
 			dispatch({
 				type: 'SET_ACCESS_TOKEN',
 				payload: accessToken,
 			});
 			const user = jwtDecode(accessToken);
-			console.log(user);
 			dispatch({
 				type: 'SET_USER',
 				payload: user,
 			});
+			history.push('/dashboard');
 		} catch (error) {
 			console.log(error);
 		} finally {
@@ -91,7 +89,7 @@ export default function Login() {
 							<FormLabel>Registration Number</FormLabel>
 							<Input
 								type="number"
-								onChange={(event) => setUsername(event.target.value)}
+								onChange={(event) => setRegistrationNumber(event.target.value)}
 							/>
 						</FormControl>
 						<FormControl id="password">

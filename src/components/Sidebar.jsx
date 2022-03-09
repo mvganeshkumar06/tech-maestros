@@ -120,11 +120,19 @@ export default function Sidebar() {
 						else changeNavSize('small');
 					}}
 				/>
-				{navListItems[state.user.userType].map((listItem) => (
-					<Link to={`${path}/${listItem.title.toLowerCase()}`} style={{ width: '100%' }}>
-						<NavItem navSize={navSize} icon={listItem.icon} title={listItem.title} />
-					</Link>
-				))}
+				{state.user &&
+					navListItems[state.user.userType].map((listItem) => (
+						<Link
+							to={`${path}/${listItem.title.toLowerCase()}`}
+							style={{ width: '100%' }}
+						>
+							<NavItem
+								navSize={navSize}
+								icon={listItem.icon}
+								title={listItem.title}
+							/>
+						</Link>
+					))}
 			</Flex>
 
 			<Flex

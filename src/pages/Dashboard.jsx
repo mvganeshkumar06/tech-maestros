@@ -19,8 +19,8 @@ export default function Dashboard() {
 						<Route path={`${path}/profile`} exact>
 							<StudentProfileForm />
 						</Route>
-						<Route path={`${path}/home`}>
-							<StudentProfileForm />
+						<Route path={`${path}/home`} exact>
+							<h1>Hello</h1>
 						</Route>
 						<Route path={`${path}/jobs`} exact>
 							<h1>Hellio from jobs</h1>

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './Sidebar.css';
 import { Flex, Text, IconButton, Divider, Avatar, Heading, ListItem } from '@chakra-ui/react';
 import { FiMenu, FiHome, FiCalendar, FiUser, FiDollarSign } from 'react-icons/fi';
 import { IoPawOutline } from 'react-icons/io5';

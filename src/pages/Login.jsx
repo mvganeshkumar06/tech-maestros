@@ -14,31 +14,49 @@ import {
 	Select,
 	Spinner,
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import AppContext from '../context/app-context';
-
-import { fetchLogin } from '../api/Api';
+import jwtDecode from 'jwt-decode';
 
 export default function Login() {
 	const { state, dispatch } = useContext(AppContext);
-
-	const [email, setEmail] = useState('');
+	const history = useHistory();
+	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [userType, setUserType] = useState('');
 
-	useEffect(() => {
-		console.log(email, password, userType);
-
-		console.log(state);
-	}, [email, password, userType, state]);
-
-	const handleSubmit = () => {
-		dispatch({
-			type: 'SET_IS_LOADING',
-			payload: { login: true },
-		});
-
-		fetchLogin();
+	const handleSubmit = async () => {
+		// dispatch({
+		// 	type: 'SET_IS_LOADING',
+		// 	payload: { login: true },
+		// });
+		// const response = await fetch('https://tech-maestros-api.herokuapp.com/auth/login', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify({
+		// 		registrationNumber: username,
+		// 		password: password,
+		// 		user: userType,
+		// 	}),
+		// 	headers: {
+		// 		'Content-type': 'application/json; charset=UTF-8',
+		// 	},
+		// });
+		// const res = response.json();
+		// localStorage.setItem('accessToken', res.accessToken);
+		// dispatch({
+		// 	type: 'SET_ACCESS_TOKEN',
+		// 	payload: res.accessToken,
+		// });
+		// const user = jwtDecode(res.accessToken);
+		// console.log(state);
+		// dispatch({
+		// 	type: 'SET_USER',
+		// 	payload: user,
+		// });
+		// dispatch({
+		// 	type: 'SET_IS_LOADING',
+		// 	payload: { login: false },
+		// });
 	};
 
 	return (
@@ -63,11 +81,11 @@ export default function Login() {
 						<Text fontSize={14} color={'gray.600'}>
 							Enter your email and password to sign in
 						</Text>
-						<FormControl id="email">
-							<FormLabel>Email address</FormLabel>
+						<FormControl id="registrationNumber">
+							<FormLabel>Registration Number</FormLabel>
 							<Input
-								type="email"
-								onChange={(event) => setEmail(event.target.value)}
+								type="number"
+								onChange={(event) => setUsername(event.target.value)}
 							/>
 						</FormControl>
 						<FormControl id="password">
@@ -81,7 +99,7 @@ export default function Login() {
 							<FormLabel>Login As</FormLabel>
 							<Select
 								placeholder="Select User Type"
-								onChange={(event) => console.log(event.target.value)}
+								onChange={(event) => setUserType(event.target.value)}
 							>
 								<option value="student">Student</option>
 								<option value="college">College</option>

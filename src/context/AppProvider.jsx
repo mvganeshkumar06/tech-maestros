@@ -18,7 +18,7 @@ const AppProvider = ({ children }) => {
 	});
 
 	useEffect(() => {
-		const accessToken = localStorage.getItem('user-access-token');
+		const accessToken = localStorage.getItem('accessToken');
 
 		if (accessToken) {
 			dispatch({
@@ -27,7 +27,7 @@ const AppProvider = ({ children }) => {
 			});
 
 			const user = jwtDecode(accessToken);
-
+			console.log(state);
 			dispatch({
 				type: 'SET_USER',
 				payload: user,

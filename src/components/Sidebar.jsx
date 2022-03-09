@@ -1,35 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Flex, Text, IconButton, Divider, Avatar, Heading, ListItem } from '@chakra-ui/react';
 import { FiMenu, FiHome, FiCalendar, FiUser, FiDollarSign } from 'react-icons/fi';
 import { IoPawOutline } from 'react-icons/io5';
 import NavItem from '../components/NavItem';
 import { Link, useRouteMatch } from 'react-router-dom';
-
+import AppContext from '../context/app-context';
 export default function Sidebar() {
 	const [navSize, changeNavSize] = useState('large');
 	let { path, url } = useRouteMatch();
-	const navListItems = [
-		{
-			icon: FiHome,
-			title: 'Home',
-		},
-		{
-			icon: FiUser,
-			title: 'Profile',
-		},
-		{
-			icon: FiDollarSign,
-			title: 'Jobs',
-		},
-		{
-			icon: IoPawOutline,
-			title: 'Notifications',
-		},
-		{
-			icon: FiDollarSign,
-			title: 'Events',
-		},
-	];
+	const { state, dispatch } = useContext(AppContext);
+	const navListItems = {
+		student: [
+			{
+				icon: FiHome,
+				title: 'Home',
+			},
+			{
+				icon: FiUser,
+				title: 'Profile',
+			},
+			{
+				icon: FiDollarSign,
+				title: 'Jobs',
+			},
+			{
+				icon: IoPawOutline,
+				title: 'Notifications',
+			},
+			{
+				icon: FiDollarSign,
+				title: 'Events',
+			},
+		],
+
+		college: [
+			{
+				icon: FiHome,
+				title: 'Home',
+			},
+			{
+				icon: FiUser,
+				title: 'Profile',
+			},
+			{
+				icon: FiUser,
+				title: 'Students',
+			},
+			{
+				icon: FiDollarSign,
+				title: 'Jobs',
+			},
+			{
+				icon: IoPawOutline,
+				title: 'Notifications',
+			},
+			{
+				icon: FiDollarSign,
+				title: 'Events',
+			},
+		],
+
+		college: [
+			{
+				icon: FiHome,
+				title: 'Home',
+			},
+			{
+				icon: FiUser,
+				title: 'Profile',
+			},
+			{
+				icon: FiUser,
+				title: 'Comapany',
+			},
+			{
+				icon: FiUser,
+				title: 'Students',
+			},
+			{
+				icon: FiDollarSign,
+				title: 'Jobs',
+			},
+			{
+				icon: IoPawOutline,
+				title: 'Notifications',
+			},
+			{
+				icon: FiDollarSign,
+				title: 'Events',
+			},
+		],
+	};
 	return (
 		<Flex
 			className="side-nav"
@@ -59,8 +120,8 @@ export default function Sidebar() {
 						else changeNavSize('small');
 					}}
 				/>
-				{navListItems.map((listItem) => (
-					<Link to={`${path}/${listItem.title.toLowerCase()}`}>
+				{navListItems[state.user.userType].map((listItem) => (
+					<Link to={`${path}/${listItem.title.toLowerCase()}`} style={{ width: '100%' }}>
 						<NavItem navSize={navSize} icon={listItem.icon} title={listItem.title} />
 					</Link>
 				))}

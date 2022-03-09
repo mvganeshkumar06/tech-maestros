@@ -47,11 +47,14 @@ export default function Login() {
 				type: 'SET_ACCESS_TOKEN',
 				payload: accessToken,
 			});
-			const user = jwtDecode(accessToken);
+			const _user = jwtDecode(accessToken);
+			const user = { ..._user, userType: userType };
+			localStorage.setItem('userType', userType);
 			dispatch({
 				type: 'SET_USER',
 				payload: user,
 			});
+
 			history.push('/dashboard');
 		} catch (error) {
 			console.log(error);

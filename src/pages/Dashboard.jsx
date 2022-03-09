@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Sidebar from '../components/Sidebar';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import StudentProfileForm from '../components/StudentProfileForm';
-
+import AppContext from '../context/app-context';
 export default function Dashboard() {
 	let { path, url } = useRouteMatch();
+	const { state, dispatch } = useContext(AppContext);
+	console.log(state);
 	return (
 		<div className="dashboard">
 			<Grid templateColumns="200px calc(100% - 200px)">

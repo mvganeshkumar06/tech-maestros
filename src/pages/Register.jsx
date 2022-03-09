@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
 	Flex,
 	Box,
@@ -7,16 +7,61 @@ import {
 	Input,
 	Stack,
 	Button,
-	Link,
 	Heading,
+	Link,
 	Text,
 	useColorModeValue,
 	Select,
+	Spinner,
 } from '@chakra-ui/react';
-
-import { Link as RouterLink } from 'react-router-dom';
+import axios from 'axios';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import AppContext from '../context/app-context';
+import jwtDecode from 'jwt-decode';
 
 export default function Register() {
+	const { state, dispatch } = useContext(AppContext);
+	const history = useHistory();
+	const [registrationNumber, setRegistrationNumber] = useState('');
+	const [email, setEmail] = useState('');
+	const [name, setName] = useState('');
+	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [userType, setUserType] = useState('');
+
+	const handleSubmit = async () => {
+		dispatch({
+			type: 'SET_IS_LOADING',
+			payload: { register: true },
+		});
+		try {
+			const response = await axios({
+				method: 'post',
+				url: 'https://tech-maestros-api.herokuapp.com/auth/register',
+				data: {
+					user: userType,
+					name: name,
+					registrationNumber: registrationNumber,
+					password: password,
+					contact: {
+						email: {
+							college: email,
+						},
+					},
+				},
+			});
+
+			history.push('/login');
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch({
+				type: 'SET_IS_LOADING',
+				payload: { login: false },
+			});
+		}
+	};
+
 	return (
 		<Flex
 			minH={'100vh'}
@@ -37,27 +82,46 @@ export default function Register() {
 							Register
 						</Heading>
 						<FormControl id="userName">
-							<FormLabel>User Name</FormLabel>
-							<Input type="userName" />
+							<FormLabel>Registration Number</FormLabel>
+							<Input
+								type="text"
+								onChange={(event) => setRegistrationNumber(event.target.value)}
+							/>
+						</FormControl>
+						<FormControl id="name">
+							<FormLabel>Name</FormLabel>
+							<Input type="name" onChange={(event) => setName(event.target.value)} />
 						</FormControl>
 						<FormControl id="email">
 							<FormLabel>Email address</FormLabel>
-							<Input type="email" />
+							<Input
+								type="email"
+								onChange={(event) => setEmail(event.target.value)}
+							/>
 						</FormControl>
 						<FormControl id="password">
 							<FormLabel>Password</FormLabel>
-							<Input type="password" />
+							<Input
+								type="password"
+								onChange={(event) => setPassword(event.target.value)}
+							/>
 						</FormControl>
 						<FormControl id="confirmPasswoad">
 							<FormLabel>Confirm Password</FormLabel>
-							<Input type="confirmPassword" />
+							<Input
+								type="confirmPassword"
+								onChange={(event) => setConfirmPassword(event.target.value)}
+							/>
 						</FormControl>
 						<FormControl id="userType">
 							<FormLabel>Register As</FormLabel>
-							<Select placeholder="Select option">
-								<option value="option1">Student</option>
-								<option value="option2">College</option>
-								<option value="option3">Company</option>
+							<Select
+								placeholder="Select option"
+								onChange={(event) => setUserType(event.target.value)}
+							>
+								<option value="student">Student</option>
+								<option value="college">College</option>
+								<option value="company">Company</option>
 							</Select>
 						</FormControl>
 						<Stack spacing={4} pt={5} align={'center'}>
@@ -68,11 +132,12 @@ export default function Register() {
 									bg: 'purple.500',
 								}}
 								w={'100%'}
+								onClick={handleSubmit}
 							>
-								REGISTER
+								{state.isLoading.register ? <Spinner size="md" /> : 'REGISTER'}
 							</Button>
 							<Text fontSize={'sm'} color={'gray.600'}>
-								Already have an account?{' '}
+								Already have an account?
 								<Link color={'purple.400'} as={RouterLink} to="/login">
 									Login
 								</Link>

@@ -24,14 +24,15 @@ function StudentProfileForm() {
 			align={'center'}
 			justify={'center'}
 			bg={useColorModeValue('#fff', 'gray.800')}
+			w={'90%'}
 		>
-			<Stack spacing={8} mx={'auto'} py={12} px={6}>
+			<Stack spacing={8} mx={'auto'} py={12} px={6} w={'100%'}>
 				<Box
 					rounded={'md'}
 					bg={useColorModeValue('white', 'gray.700')}
 					boxShadow={'lg'}
 					p={8}
-					w={700}
+					w={'100%'}
 				>
 					<Stack spacing={4} paddingTop={4}>
 						<Heading fontSize={32} color={useColorModeValue('purple.400')}>
@@ -122,7 +123,8 @@ function StudentProfileForm() {
 								}}
 								w={'100%'}
 								// onClick={handleSubmit}
-							>Submit
+							>
+								Submit
 								{/* {state.isLoading.login ? <Spinner size="md" /> : 'LOGIN'}    */}
 							</Button>
 							<Text fontSize={'sm'} color={'gray.600'}>

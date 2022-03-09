@@ -6,7 +6,6 @@ import jwtDecode from 'jwt-decode';
 const AppProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, {
 		user: undefined,
-		userType: '',
 		studentProfile: {},
 		accessToken: '',
 		sortOption: '',
@@ -23,7 +22,7 @@ const AppProvider = ({ children }) => {
 
 	useEffect(() => {
 		const accessToken = localStorage.getItem('accessToken');
-		const userType = localStorage.getItem('userTyper');
+		const userType = localStorage.getItem('userType');
 		if (accessToken) {
 			dispatch({
 				type: 'SET_ACCESS_TOKEN',

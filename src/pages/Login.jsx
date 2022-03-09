@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
 	Flex,
 	Box,
@@ -12,9 +12,35 @@ import {
 	Text,
 	useColorModeValue,
 	Select,
+	Spinner,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import AppContext from '../context/app-context';
+
+import { fetchLogin } from '../api/Api';
+
 export default function Login() {
+	const { state, dispatch } = useContext(AppContext);
+
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [userType, setUserType] = useState('');
+
+	useEffect(() => {
+		console.log(email, password, userType);
+
+		console.log(state);
+	}, [email, password, userType, state]);
+
+	const handleSubmit = () => {
+		dispatch({
+			type: 'SET_IS_LOADING',
+			payload: { login: true },
+		});
+
+		fetchLogin();
+	};
+
 	return (
 		<Flex
 			minH={'100vh'}
@@ -39,18 +65,27 @@ export default function Login() {
 						</Text>
 						<FormControl id="email">
 							<FormLabel>Email address</FormLabel>
-							<Input type="email" />
+							<Input
+								type="email"
+								onChange={(event) => setEmail(event.target.value)}
+							/>
 						</FormControl>
 						<FormControl id="password">
 							<FormLabel>Password</FormLabel>
-							<Input type="password" />
+							<Input
+								type="password"
+								onChange={(event) => setPassword(event.target.value)}
+							/>
 						</FormControl>
 						<FormControl id="userType">
 							<FormLabel>Login As</FormLabel>
-							<Select placeholder="Select option">
-								<option value="option1">Student</option>
-								<option value="option2">College</option>
-								<option value="option3">Company</option>
+							<Select
+								placeholder="Select User Type"
+								onChange={(event) => console.log(event.target.value)}
+							>
+								<option value="student">Student</option>
+								<option value="college">College</option>
+								<option value="company">Company</option>
 							</Select>
 						</FormControl>
 						<Stack spacing={4} pt={5} align={'center'}>
@@ -61,11 +96,12 @@ export default function Login() {
 									bg: 'purple.500',
 								}}
 								w={'100%'}
+								onClick={handleSubmit}
 							>
-								LOGIN
+								{state.isLoading.login ? <Spinner size="md" /> : 'LOGIN'}
 							</Button>
 							<Text fontSize={'sm'} color={'gray.600'}>
-								Don't have an account?{' '}
+								Don't have an account?
 								<Link color={'purple.400'} as={RouterLink} to="/register">
 									Register
 								</Link>

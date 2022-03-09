@@ -148,12 +148,21 @@ export default function Sidebar() {
 					<Avatar size="sm" src="avatar-1.jpg" />
 					<Flex flexDir="column" ml={4} display={navSize == 'small' ? 'none' : 'flex'}>
 						<Heading as="h3" size="sm">
-							{state.user.name}
+							{state.user?.name}
 						</Heading>
 						<Text
 							color="gray"
 							style={{ cursor: 'pointer' }}
 							onClick={() => {
+								dispatch({
+									type: 'SET_USER',
+									payload: null,
+								});
+
+								dispatch({
+									type: 'SET_ACCESS_TOKEN',
+									payload: null,
+								});
 								localStorage.clear();
 								history.push('/');
 							}}

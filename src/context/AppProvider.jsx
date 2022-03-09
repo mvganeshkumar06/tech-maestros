@@ -5,18 +5,20 @@ import jwtDecode from 'jwt-decode';
 
 const AppProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(reducer, {
-		user: undefined,
+		user: null,
 		studentProfile: {},
-		accessToken: '',
+		accessToken: null,
 		sortOption: '',
 		filterOptions: {},
 		isLoading: {
 			login: false,
 			register: false,
+			getStudents: false,
 		},
 		isError: {
 			login: false,
 			register: false,
+			getStudents: false,
 		},
 	});
 

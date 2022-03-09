@@ -74,7 +74,8 @@ export default function Login() {
 	};
 
 	useEffect(() => {
-		if (state.user && state.user.length) {
+		console.log(state);
+		if (state.user) {
 			history.push('/dashboard');
 		}
 	}, []);

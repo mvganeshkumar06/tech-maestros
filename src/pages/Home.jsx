@@ -2,6 +2,7 @@ import React from 'react';
 import JobListItem from '../components/JobListItem';
 import { Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import CallToActionWithIllustration from '../components/Home';
 const Home = () => {
 	return (
 		<div
@@ -13,12 +14,7 @@ const Home = () => {
 				alignItems: 'center',
 			}}
 		>
-			<h1>HOME</h1>
-			<Link to="/login">
-				<Button colorScheme="purple" size="md">
-					Login
-				</Button>
-			</Link>
+			<CallToActionWithIllustration />
 		</div>
 	);
 };

@@ -4,6 +4,8 @@ import { Grid, GridItem } from '@chakra-ui/react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import StudentProfileForm from '../components/StudentProfileForm';
 import AppContext from '../context/app-context';
+import List from '../components/Table';
+import Student from './Student';
 import Home from './Home';
 
 import JobList from '../components/JobList';
@@ -20,7 +22,7 @@ export default function Dashboard() {
 				<GridItem>
 					<Switch>
 						<Route path={`${path}/home`} exact>
-							<Home />
+							<h1>HOME PAGE</h1>
 						</Route>
 						<Route path={`${path}/profile`} exact>
 							<StudentProfileForm />
@@ -30,6 +32,12 @@ export default function Dashboard() {
 						</Route>
 						<Route path={`${path}/notifications`} exact>
 							<h1>Notifications</h1>
+						</Route>
+						<Route path={`${path}/events`} exact>
+							<h1>Events</h1>
+						</Route>
+						<Route path={`${path}/students`} exact>
+							<Student />
 						</Route>
 					</Switch>
 				</GridItem>

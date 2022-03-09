@@ -1,8 +1,8 @@
 import React from 'react';
-import JobListItem from '../components/JobListItem';
+import JobList from '../components/JobList';
 
 const Home = () => {
-	return <JobListItem />;
+	return <div></div>;
 };
 
 export default Home;

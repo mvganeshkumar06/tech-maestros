@@ -41,11 +41,6 @@ export default function Login() {
 					email: email,
 					password: password,
 				},
-				// data: {
-				// 	user: userType,
-				// 	registrationNumber: registrationNumber,
-				// 	password: password,
-				// },
 			});
 			const { accessToken } = response.data;
 			localStorage.setItem('accessToken', accessToken);

@@ -52,7 +52,8 @@ export default function CallToActionWithIllustration() {
 export const Illustration = (props) => {
 	return (
 		<Icon
-			width="100%"
+			width="70%"
+			margin={'auto'}
 			viewBox="0 0 702 448"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"

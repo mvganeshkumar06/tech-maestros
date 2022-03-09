@@ -14,10 +14,100 @@ import {
 	Select,
 	Spinner,
 } from '@chakra-ui/react';
+import AppContext from '../context/app-context';
+import axios from 'axios';
 function StudentProfileForm() {
-	const [name, setName] = useState('');
-	const [password, setPassword] = useState('');
-	const [userType, setUserType] = useState('');
+	const { state, dispatch } = useContext(AppContext);
+	const [collegeList, setCollegeList] = useState([]);
+
+	const [studentProfile, setStudentProfile] = useState({
+		name: '',
+		registrationNumber: '',
+		dob: null,
+		college: '',
+		phone: '',
+		collegeEmail: '',
+		personalEmail: '',
+		// linkedin: '',
+		// github: '',
+		address: '',
+		education: {
+			college: {
+				graduation: {
+					year: undefined,
+				},
+				grade: undefined,
+			},
+		},
+	});
+
+	const getData = async () => {
+		try {
+			dispatch({
+				type: 'SET_IS_LOADING',
+				payload: { getColleges: true },
+			});
+
+			const response = await axios({
+				method: 'get',
+				url: 'https://tech-maestros-api.herokuapp.com/colleges/',
+			});
+			setCollegeList(response['data']);
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch({
+				type: 'SET_IS_LOADING',
+				payload: { getColleges: false },
+			});
+		}
+	};
+
+	useEffect(() => {
+		getData();
+	}, []);
+
+	const getStudentProfile = async () => {
+		if (state.user) {
+			const studentResponse = await axios({
+				method: 'get',
+				url: `https://tech-maestros-api.herokuapp.com/students/${state.user.id}`,
+			});
+			setStudentProfile(studentResponse.data);
+		}
+	};
+
+	useEffect(() => {
+		if (state.user) {
+			getStudentProfile();
+		}
+	}, [state.user]);
+
+	const handleSubmit = async () => {
+		dispatch({
+			type: 'SET_IS_LOADING',
+			payload: { profile: true },
+		});
+
+		try {
+			const response = await axios({
+				method: 'post',
+				url: `https://tech-maestros-api.herokuapp.com/students/${state.user.id}`,
+				data: studentProfile,
+			});
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch({
+				type: 'SET_IS_LOADING',
+				payload: { profile: false },
+			});
+		}
+	};
+
+	useEffect(() => {
+		console.log(studentProfile);
+	}, [studentProfile]);
 	return (
 		<Flex
 			minH={'100vh'}
@@ -43,77 +133,185 @@ function StudentProfileForm() {
 						</Text>
 						<FormControl id="name">
 							<FormLabel>Name</FormLabel>
-							<Input type="text" onChange={(event) => setName(event.target.value)} />
+							<Input
+								type="text"
+								name="name"
+								value={studentProfile.name}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										name: event.target.value,
+									}))
+								}
+							/>
+						</FormControl>
+						<FormControl id="registrationNumber">
+							<FormLabel>Registration Number</FormLabel>
+							<Input
+								type="text"
+								value={studentProfile.registrationNumber}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										registrationNumber: event.target.value,
+									}))
+								}
+							/>
 						</FormControl>
 						<FormControl id="dob">
 							<FormLabel>Date Of Birth</FormLabel>
-							<input type="date"></input>
-						</FormControl>
-						<FormControl id="phone-no">
-							<FormLabel>Phone No</FormLabel>
-							<Input
-								type="number"
-								onChange={(event) => setName(event.target.value)}
-							/>
-						</FormControl>
-						<FormControl id="personal-mail">
-							<FormLabel>Personal Mail</FormLabel>
-							<Input type="email" onChange={(event) => setName(event.target.value)} />
-						</FormControl>
-						<FormControl id="linkedin">
-							<FormLabel>LinkedIn Profile</FormLabel>
-							<Input type="text" onChange={(event) => setName(event.target.value)} />
-						</FormControl>
-						<FormControl id="github">
-							<FormLabel>Github Profile</FormLabel>
-							<Input type="text" onChange={(event) => setName(event.target.value)} />
-						</FormControl>
-						<FormControl id="city">
-							<FormLabel>City</FormLabel>
-							<Input type="text" onChange={(event) => setName(event.target.value)} />
+							<input
+								type="date"
+								value={studentProfile.dob}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										dob: event.target.value,
+									}))
+								}
+							></input>
 						</FormControl>
 						<FormControl id="college-name">
 							<FormLabel>College</FormLabel>
 							<Select
 								placeholder="Select College"
-								onChange={(event) => setUserType(event.target.value)}
+								value={studentProfile.college.name}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										college: { ...prev.college, name: event.target.value },
+									}))
+								}
 							>
-								<option value="Sri Venkateswara College Of Engineering">
-									Sri Venkateswara College Of Engineering
-								</option>
-								<option value="Sri Sairam Engineering College">
-									Sri Sairam Engineering College
-								</option>
+								{collegeList?.map((college) => {
+									return (
+										<option value={college._id}>
+											{college.name.toUpperCase()}
+										</option>
+									);
+								})}
 							</Select>
 						</FormControl>
-						<FormControl id="degree">
-							<FormLabel>Highest Qualification</FormLabel>
-							<Select
-								placeholder="Select Highest Qualification"
-								onChange={(event) => setUserType(event.target.value)}
-							>
-								<option value="Bachelor of Engineering - BE">
-									Bachelor of Engineering - BE
-								</option>
-								<option value="Bachelor of Technology - BTech">
-									Bachelor of Technology - BTech
-								</option>
-							</Select>
-						</FormControl>
-						<FormControl id="cgpa">
-							<FormLabel>CGPA</FormLabel>
+						<FormControl id="phone-no">
+							<FormLabel>Phone No</FormLabel>
 							<Input
 								type="number"
-								onChange={(event) => setName(event.target.value)}
+								value={studentProfile.phone}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										phone: event.target.value,
+									}))
+								}
+							/>
+						</FormControl>
+						<FormControl id="college-mail">
+							<FormLabel>College Mail</FormLabel>
+							<Input
+								type="email"
+								value={studentProfile.collegeEmail}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										collegeEmail: event.target.value,
+									}))
+								}
+							/>
+						</FormControl>
+						<FormControl id="personal-mail">
+							<FormLabel>Personal Mail</FormLabel>
+							<Input
+								type="email"
+								value={studentProfile.personalEmail}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										personalEmail: event.target.value,
+									}))
+								}
+							/>
+						</FormControl>
+						{/* <FormControl id="linkedin">
+							<FormLabel>LinkedIn Profile</FormLabel>
+							<Input
+								type="text"
+								value={studentProfile.linkedin}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										linkedin: event.target.value,
+									}))
+								}
+							/>
+						</FormControl>
+						<FormControl id="github">
+							<FormLabel>Github Profile</FormLabel>
+							<Input
+								type="text"
+								value={studentProfile.github}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										github: event.target.value,
+									}))
+								}
+							/>
+						</FormControl> */}
+						<FormControl id="address">
+							<FormLabel>Address</FormLabel>
+							<Input
+								type="text"
+								value={studentProfile.address}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										address: event.target.value,
+									}))
+								}
+							/>
+						</FormControl>
+						<FormControl id="grade">
+							<FormLabel>Grade</FormLabel>
+							<Input
+								type="number"
+								value={studentProfile.education.college.grade}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										education: {
+											...prev.education,
+											college: {
+												...prev.education.college,
+												grade: event.target.value,
+											},
+										},
+									}))
+								}
 							/>
 						</FormControl>
 						<FormControl id="yearofpassing">
 							<FormLabel>Year Of Passing</FormLabel>
 							<Input
 								type="number"
-								onChange={(event) => setName(event.target.value)}
+								value={studentProfile.education.college.graduation.year}
+								onChange={(event) =>
+									setStudentProfile((prev) => ({
+										...prev,
+										education: {
+											...prev.education,
+											college: {
+												...prev.education.college,
+												graduation: {
+													...prev.education.college.graduation,
+													year: event.target.value,
+												},
+											},
+										},
+									}))
+								}
 							/>
 						</FormControl>
+						// IS VERIFIED
 						<Stack spacing={4} pt={5} align={'center'}>
 							<Button
 								bg={'purple.400'}
@@ -122,17 +320,10 @@ function StudentProfileForm() {
 									bg: 'purple.500',
 								}}
 								w={'100%'}
-								// onClick={handleSubmit}
+								onClick={handleSubmit}
 							>
-								Submit
-								{/* {state.isLoading.login ? <Spinner size="md" /> : 'LOGIN'}    */}
+								{state.isLoading.profile ? <Spinner size="md" /> : 'Submit'}
 							</Button>
-							<Text fontSize={'sm'} color={'gray.600'}>
-								Don't have an account?
-								<Link color={'purple.400'} /*as={RouterLink}*/ to="/register">
-									Register
-								</Link>
-							</Text>
 						</Stack>
 					</Stack>
 				</Box>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Wrap, WrapItem, Avatar, Button, Flex, Text } from '@chakra-ui/react';
+import { Link, useRouteMatch } from 'react-router-dom';
 function JobListItem({ name, source, industry, location, role }) {
+	let { path, url } = useRouteMatch;
 	return (
 		<>
 			<Flex
@@ -44,23 +46,26 @@ function JobListItem({ name, source, industry, location, role }) {
 					</Flex>
 				</Flex>
 				<Flex
-					justifyContent={'space-between'}
+					justifyContent="space-between"
 					alignItems={'center'}
 					p="10px"
 					borderRadius="10px"
 					border={'2px solid #ddd'}
 				>
 					<Text>{role}</Text>
-					<Button
-						bgColor={'purple.400'}
-						color={'#fff'}
-						size={'sm'}
-						_hover={{
-							bg: 'purple.500',
-						}}
-					>
-						View Details
-					</Button>
+
+					<Link to={`/${'post-description'}`}>
+						<Button
+							bgColor={'purple.400'}
+							color={'#fff'}
+							size={'sm'}
+							_hover={{
+								bg: 'purple.500',
+							}}
+						>
+							View Details
+						</Button>
+					</Link>
 				</Flex>
 			</Flex>
 		</>

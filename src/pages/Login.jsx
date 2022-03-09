@@ -22,7 +22,7 @@ import jwtDecode from 'jwt-decode';
 export default function Login() {
 	const { state, dispatch } = useContext(AppContext);
 	const history = useHistory();
-	const [registrationNumber, setRegistrationNumber] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [userType, setUserType] = useState('');
 
@@ -31,15 +31,21 @@ export default function Login() {
 			type: 'SET_IS_LOADING',
 			payload: { login: true },
 		});
+
 		try {
 			const response = await axios({
 				method: 'post',
 				url: 'https://tech-maestros-api.herokuapp.com/auth/login',
 				data: {
-					user: userType,
-					registrationNumber: registrationNumber,
+					userType: userType,
+					email: email,
 					password: password,
 				},
+				// data: {
+				// 	user: userType,
+				// 	registrationNumber: registrationNumber,
+				// 	password: password,
+				// },
 			});
 			const { accessToken } = response.data;
 			localStorage.setItem('accessToken', accessToken);
@@ -49,6 +55,7 @@ export default function Login() {
 			});
 			const _user = jwtDecode(accessToken);
 			const user = { ..._user, userType: userType };
+			console.log('USER : ', user);
 			localStorage.setItem('userType', userType);
 			dispatch({
 				type: 'SET_USER',
@@ -65,6 +72,12 @@ export default function Login() {
 			});
 		}
 	};
+
+	useEffect(() => {
+		if (state.user && state.user.length) {
+			history.push('/dashboard');
+		}
+	}, []);
 
 	return (
 		<Flex
@@ -88,11 +101,11 @@ export default function Login() {
 						<Text fontSize={14} color={'gray.600'}>
 							Enter your email and password to sign in
 						</Text>
-						<FormControl id="registrationNumber">
-							<FormLabel>Registration Number</FormLabel>
+						<FormControl id="email">
+							<FormLabel>Email</FormLabel>
 							<Input
-								type="number"
-								onChange={(event) => setRegistrationNumber(event.target.value)}
+								type="email"
+								onChange={(event) => setEmail(event.target.value)}
 							/>
 						</FormControl>
 						<FormControl id="password">

@@ -4,7 +4,7 @@ import { Flex, Text, Icon, Link, Menu, MenuButton, MenuList } from '@chakra-ui/r
 export default function NavItem({ icon, title, active, navSize }) {
 	return (
 		<Flex
-			mt={30}
+			mt={'10px'}
 			flexDir="column"
 			w="100%"
 			alignItems={navSize == 'small' ? 'center' : 'flex-start'}

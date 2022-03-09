@@ -73,6 +73,12 @@ export default function Login() {
 		}
 	};
 
+	useEffect(() => {
+		if (state.user && state.user.length) {
+			history.push('/dashboard');
+		}
+	}, []);
+
 	return (
 		<Flex
 			minH={'100vh'}

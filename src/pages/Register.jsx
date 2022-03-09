@@ -51,7 +51,7 @@ export default function Register() {
 		} finally {
 			dispatch({
 				type: 'SET_IS_LOADING',
-				payload: { login: false },
+				payload: { register: false },
 			});
 		}
 	};

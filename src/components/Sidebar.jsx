@@ -3,9 +3,10 @@ import { Flex, Text, IconButton, Divider, Avatar, Heading, ListItem } from '@cha
 import { FiMenu, FiHome, FiCalendar, FiUser, FiDollarSign } from 'react-icons/fi';
 import { IoPawOutline } from 'react-icons/io5';
 import NavItem from '../components/NavItem';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import AppContext from '../context/app-context';
 export default function Sidebar() {
+	const history = useHistory();
 	const [navSize, changeNavSize] = useState('large');
 	let { path, url } = useRouteMatch();
 	const { state, dispatch } = useContext(AppContext);
@@ -147,9 +148,18 @@ export default function Sidebar() {
 					<Avatar size="sm" src="avatar-1.jpg" />
 					<Flex flexDir="column" ml={4} display={navSize == 'small' ? 'none' : 'flex'}>
 						<Heading as="h3" size="sm">
-							Sylwia Weller
+							{state.user.name}
 						</Heading>
-						<Text color="gray">Admin</Text>
+						<Text
+							color="gray"
+							style={{ cursor: 'pointer' }}
+							onClick={() => {
+								localStorage.clear();
+								history.push('/');
+							}}
+						>
+							Logout
+						</Text>
 					</Flex>
 				</Flex>
 			</Flex>

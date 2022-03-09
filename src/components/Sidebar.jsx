@@ -60,7 +60,7 @@ export default function Sidebar() {
 			},
 		],
 
-		college: [
+		company: [
 			{
 				icon: FiHome,
 				title: 'Home',
@@ -71,7 +71,7 @@ export default function Sidebar() {
 			},
 			{
 				icon: FiUser,
-				title: 'Comapany',
+				title: 'Colleges',
 			},
 			{
 				icon: FiUser,

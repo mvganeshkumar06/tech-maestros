@@ -22,7 +22,6 @@ import jwtDecode from 'jwt-decode';
 export default function Register() {
 	const { state, dispatch } = useContext(AppContext);
 	const history = useHistory();
-	const [registrationNumber, setRegistrationNumber] = useState('');
 	const [email, setEmail] = useState('');
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
@@ -39,15 +38,10 @@ export default function Register() {
 				method: 'post',
 				url: 'https://tech-maestros-api.herokuapp.com/auth/register',
 				data: {
-					user: userType,
+					userType: userType,
 					name: name,
-					registrationNumber: registrationNumber,
+					email: email,
 					password: password,
-					contact: {
-						email: {
-							college: email,
-						},
-					},
 				},
 			});
 
@@ -81,13 +75,7 @@ export default function Register() {
 						<Heading fontSize={32} color={useColorModeValue('purple.400')}>
 							Register
 						</Heading>
-						<FormControl id="userName">
-							<FormLabel>Registration Number</FormLabel>
-							<Input
-								type="text"
-								onChange={(event) => setRegistrationNumber(event.target.value)}
-							/>
-						</FormControl>
+
 						<FormControl id="name">
 							<FormLabel>Name</FormLabel>
 							<Input type="name" onChange={(event) => setName(event.target.value)} />
@@ -109,7 +97,7 @@ export default function Register() {
 						<FormControl id="confirmPasswoad">
 							<FormLabel>Confirm Password</FormLabel>
 							<Input
-								type="confirmPassword"
+								type="password"
 								onChange={(event) => setConfirmPassword(event.target.value)}
 							/>
 						</FormControl>

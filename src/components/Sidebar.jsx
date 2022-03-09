@@ -3,9 +3,11 @@ import { Flex, Text, IconButton, Divider, Avatar, Heading, ListItem } from '@cha
 import { FiMenu, FiHome, FiCalendar, FiUser, FiDollarSign } from 'react-icons/fi';
 import { IoPawOutline } from 'react-icons/io5';
 import NavItem from '../components/NavItem';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function Sidebar() {
 	const [navSize, changeNavSize] = useState('large');
+	let { path, url } = useRouteMatch();
 	const navListItems = [
 		{
 			icon: FiHome,
@@ -31,7 +33,7 @@ export default function Sidebar() {
 	return (
 		<Flex
 			className="side-nav"
-			pos="sticky"
+			pos="fixed"
 			h="100vh"
 			w={navSize == 'small' ? '75px' : '200px'}
 			flexDir="column"
@@ -58,7 +60,9 @@ export default function Sidebar() {
 					}}
 				/>
 				{navListItems.map((listItem) => (
-					<NavItem navSize={navSize} icon={listItem.icon} title={listItem.title} />
+					<Link to={`${path}/${listItem.title.toLowerCase()}`}>
+						<NavItem navSize={navSize} icon={listItem.icon} title={listItem.title} />
+					</Link>
 				))}
 			</Flex>
 

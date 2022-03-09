@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import StudentProfileForm from '../components/StudentProfileForm';
+import CollegeProfileForm from '../components/CollegeProfileForm';
 import { Home, Login, Register, NotFound, Dashboard } from '../pages';
+import StudentProfileForm from '../components/StudentProfileForm';
 
 const Router = () => {
 	return (
@@ -21,6 +22,9 @@ const Router = () => {
 				</Route>
 				<Route path="/student-profile" exact>
 					<StudentProfileForm />
+				</Route>
+				<Route path="/college-profile" exact>
+					<CollegeProfileForm></CollegeProfileForm>
 				</Route>
 				<Route path="*">
 					<NotFound />

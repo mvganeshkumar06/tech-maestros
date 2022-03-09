@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CollegeProfileForm from '../components/CollegeProfileForm';
 import { Home, Login, Register, NotFound, Dashboard } from '../pages';
 import StudentProfileForm from '../components/StudentProfileForm';
+import PostDescription from '../components/PostDescription';
 
 const Router = () => {
 	return (
@@ -24,7 +25,10 @@ const Router = () => {
 					<StudentProfileForm />
 				</Route>
 				<Route path="/college-profile" exact>
-					<CollegeProfileForm></CollegeProfileForm>
+					<CollegeProfileForm />
+				</Route>
+				<Route path="/post-description" exact>
+					<PostDescription />
 				</Route>
 				<Route path="*">
 					<NotFound />

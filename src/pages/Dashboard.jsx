@@ -31,9 +31,6 @@ export default function Dashboard() {
 						<Route path={`${path}/notifications`} exact>
 							<h1>Notifications</h1>
 						</Route>
-						<Route path={`${path}/events`} exact>
-							<h1>Events</h1>
-						</Route>
 					</Switch>
 				</GridItem>
 			</Grid>

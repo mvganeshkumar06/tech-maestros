@@ -6,6 +6,9 @@ import StudentProfileForm from '../components/StudentProfileForm';
 import AppContext from '../context/app-context';
 import List from '../components/Table';
 import Student from './Student';
+import Home from './Home';
+
+import JobList from '../components/JobList';
 export default function Dashboard() {
 	let { path, url } = useRouteMatch();
 	const { state, dispatch } = useContext(AppContext);
@@ -25,7 +28,7 @@ export default function Dashboard() {
 							<StudentProfileForm />
 						</Route>
 						<Route path={`${path}/jobs`} exact>
-							<h1>Jobs</h1>
+							<JobList />
 						</Route>
 						<Route path={`${path}/notifications`} exact>
 							<h1>Notifications</h1>

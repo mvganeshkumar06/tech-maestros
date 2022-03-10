@@ -35,20 +35,23 @@ export default function Colleges() {
 		getData();
 	}, []);
 
-	return !state.isLoading.getColleges ? (
+	return (
 		<Flex
 			p="10px"
 			borderRadius="10px"
 			border={'2px solid #ddd'}
 			flexDirection="column"
-			mt={5}
+			justifyContent={'center'}
+			margin={'auto'}
+			mt={10}
 			mb={20}
 			width="50rem"
-			margin={'auto'}
 		>
-			<List data={collegeList} />
+			{state.isLoading.getColleges ? (
+				<Spinner size={'xl'} textAlign={'center'} margin={'auto'} />
+			) : (
+				<List data={collegeList} />
+			)}
 		</Flex>
-	) : (
-		<Spinner size={'xl'} margin={'auto'} />
 	);
 }

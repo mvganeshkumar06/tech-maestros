@@ -37,7 +37,7 @@ export default function Dashboard() {
 							<h1>Events</h1>
 						</Route>
 						<Route path={`${path}/students`} exact>
-							<Student />
+							<Student showProceedBtn={false} />
 						</Route>
 					</Switch>
 				</GridItem>

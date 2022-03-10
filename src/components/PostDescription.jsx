@@ -143,7 +143,7 @@ function PostDescription() {
 				</Flex>
 			</Flex>
 
-			<Student />
+			<Student showProceedBtn={true} />
 		</>
 	);
 }

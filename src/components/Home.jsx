@@ -1,5 +1,7 @@
 import { Flex, Container, Heading, Stack, Text, Button, Icon, IconProps } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { UnorderedList, ListItem } from '@chakra-ui/react';
+
 export default function CallToActionWithIllustration() {
 	return (
 		<Container maxW={'5xl'}>
@@ -14,15 +16,16 @@ export default function CallToActionWithIllustration() {
 					fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
 					lineHeight={'110%'}
 				>
-					Placement Recruitment{' '}
-					<Text as={'span'} color={'purple.400'}>
-						made easy
+					<Text as={'span'} color={'purple.400'} fontWeight="bold">
+						Placement Recruitment{' '}
 					</Text>
+					made easy
 				</Heading>
-				<Text color={'gray.500'} maxW={'3xl'}>
-					Never miss a interview. Never be late for one too. Keep track of your interview
-					and receive reminders in appropriate times for job alerts.
-				</Text>
+				<UnorderedList styleType="none">
+					<ListItem>Never miss an Interview Opportunity.</ListItem>
+					<ListItem>Keep track of your Interviews.</ListItem>
+					<ListItem>Receive notifications/reminders for eligible job posts.</ListItem>
+				</UnorderedList>
 				<Stack spacing={6} direction={'row'}>
 					<Link to="/login">
 						<Button

@@ -23,7 +23,7 @@ function StudentProfileForm() {
 	const [studentProfile, setStudentProfile] = useState({
 		name: '',
 		registrationNumber: '',
-		dob: null,
+		dob: '',
 		college: '',
 		phone: '',
 		collegeEmail: '',
@@ -34,9 +34,9 @@ function StudentProfileForm() {
 		education: {
 			college: {
 				graduation: {
-					year: undefined,
+					year: '',
 				},
-				grade: undefined,
+				grade: '',
 			},
 		},
 	});
@@ -108,7 +108,8 @@ function StudentProfileForm() {
 	useEffect(() => {
 		console.log(studentProfile);
 	}, [studentProfile]);
-	return (
+	return;
+	state.isLoading.profile && (
 		<Flex
 			minH={'100vh'}
 			align={'center'}

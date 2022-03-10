@@ -1,5 +1,7 @@
 import React from 'react';
 import { Flex, Avatar, Text, Button, Tag, UnorderedList, ListItem } from '@chakra-ui/react';
+
+import Student from '../pages/Student';
 function PostDescription() {
 	const post = {
 		name: 'Google',
@@ -26,6 +28,7 @@ function PostDescription() {
 			p="20px"
 			gap="15px"
 			flexDirection={'column'}
+			margin={'auto'}
 		>
 			<Flex p="10px" borderRadius="10px" border={'2px solid #ddd'} flexDirection="column">
 				<Flex
@@ -128,6 +131,7 @@ function PostDescription() {
 					</Flex>
 				</Flex>
 			</Flex>
+			<Student />
 		</Flex>
 	);
 }

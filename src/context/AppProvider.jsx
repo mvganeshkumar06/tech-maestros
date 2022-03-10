@@ -15,12 +15,14 @@ const AppProvider = ({ children }) => {
 			register: false,
 			getStudents: false,
 			getColleges: false,
+			sendMails: false,
 		},
 		isError: {
 			login: false,
 			register: false,
 			getStudents: false,
 			getColleges: false,
+			sendMails: false,
 		},
 	});
 

@@ -35,7 +35,14 @@ function JobList() {
 	];
 	return (
 		<>
-			<Text fontSize="4xl" fontWeight={'bold'} p={10} pb={0} color={'purple.600'}>
+			<Text
+				fontSize="4xl"
+				fontWeight={'bold'}
+				p={10}
+				pb={0}
+				color={'purple.600'}
+				textAlign={'center'}
+			>
 				Apply for Jobs
 			</Text>
 			<Flex flexDirection={'column'} gap={'20px'} alignItems="center" m="1rem 0">

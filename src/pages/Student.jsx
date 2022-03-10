@@ -68,9 +68,30 @@ export default function Student({ showProceedBtn }) {
 
 	return (
 		<>
-			<Text fontSize="4xl" fontWeight={'bold'} p={10} pb={0} color={'purple.600'}>
-				Students
-			</Text>
+			{!showProceedBtn && (
+				<Text
+					fontSize="4xl"
+					fontWeight={'bold'}
+					p={10}
+					pb={0}
+					color={'purple.600'}
+					textAlign={'center'}
+				>
+					Students
+				</Text>
+			)}
+			{showProceedBtn && (
+				<Text
+					fontSize="4xl"
+					fontWeight={'bold'}
+					p={10}
+					pb={0}
+					color={'purple.600'}
+					textAlign={'center'}
+				>
+					Eligible Students
+				</Text>
+			)}
 			<Flex
 				p="10px"
 				borderRadius="10px"

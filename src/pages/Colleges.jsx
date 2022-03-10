@@ -37,7 +37,14 @@ export default function Colleges() {
 
 	return (
 		<>
-			<Text fontSize="4xl" fontWeight={'bold'} p={10} pb={0} color={'purple.600'}>
+			<Text
+				fontSize="4xl"
+				fontWeight={'bold'}
+				p={10}
+				pb={0}
+				color={'purple.600'}
+				textAlign={'center'}
+			>
 				Colleges
 			</Text>
 			<Flex

@@ -29,6 +29,7 @@ export default function Dashboard() {
 								p={10}
 								pb={0}
 								color={'purple.600'}
+								textAlign={'center'}
 							>
 								Home
 							</Text>
@@ -46,6 +47,7 @@ export default function Dashboard() {
 								p={10}
 								pb={0}
 								color={'purple.600'}
+								textAlign={'center'}
 							>
 								Notifications
 							</Text>
@@ -57,6 +59,7 @@ export default function Dashboard() {
 								p={10}
 								pb={0}
 								color={'purple.600'}
+								textAlign={'center'}
 							>
 								Events
 							</Text>

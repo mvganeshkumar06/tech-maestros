@@ -5,8 +5,9 @@ export default function List({ data }) {
 		<Table variant="simple">
 			<Thead>
 				<Tr>
+					<Th>Reg.No</Th>
 					<Th>Name</Th>
-					<Th>Action</Th>
+					<Th textAlign={'right'}>Action</Th>
 				</Tr>
 			</Thead>
 			<Tbody>
@@ -14,8 +15,9 @@ export default function List({ data }) {
 					data.map((el) => {
 						return (
 							<Tr key={el._id}>
+								<Td>{el['registrationNumber']}</Td>
 								<Td>{el['name']}</Td>
-								<Td>
+								<Td textAlign={'right'}>
 									<Button colorScheme="purple" size="sm">
 										View
 									</Button>

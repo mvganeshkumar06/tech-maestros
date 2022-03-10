@@ -16,10 +16,10 @@ export default function Sidebar() {
 				icon: FiHome,
 				title: 'Home',
 			},
-			{
-				icon: FiUser,
-				title: 'Profile',
-			},
+			// {
+			// 	icon: FiUser,
+			// 	title: 'Profile',
+			// },
 			{
 				icon: FiDollarSign,
 				title: 'Jobs',
@@ -39,10 +39,10 @@ export default function Sidebar() {
 				icon: FiHome,
 				title: 'Home',
 			},
-			{
-				icon: FiUser,
-				title: 'Profile',
-			},
+			// {
+			// 	icon: FiUser,
+			// 	title: 'Profile',
+			// },
 			{
 				icon: FiUser,
 				title: 'Students',
@@ -66,10 +66,10 @@ export default function Sidebar() {
 				icon: FiHome,
 				title: 'Home',
 			},
-			{
-				icon: FiUser,
-				title: 'Profile',
-			},
+			// {
+			// 	icon: FiUser,
+			// 	title: 'Profile',
+			// },
 			{
 				icon: FiUser,
 				title: 'Colleges',

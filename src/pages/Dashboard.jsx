@@ -7,6 +7,7 @@ import AppContext from '../context/app-context';
 import List from '../components/Table';
 import Student from './Student';
 import Home from './Home';
+import Colleges from './Colleges';
 
 import JobList from '../components/JobList';
 export default function Dashboard() {
@@ -38,6 +39,9 @@ export default function Dashboard() {
 						</Route>
 						<Route path={`${path}/students`} exact>
 							<Student />
+						</Route>
+						<Route path={`${path}/colleges`} exact>
+							<Colleges />
 						</Route>
 					</Switch>
 				</GridItem>

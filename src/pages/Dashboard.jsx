@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import Sidebar from '../components/Sidebar';
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Grid, GridItem, Text } from '@chakra-ui/react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import StudentProfileForm from '../components/StudentProfileForm';
 import AppContext from '../context/app-context';
@@ -23,7 +23,15 @@ export default function Dashboard() {
 				<GridItem>
 					<Switch>
 						<Route path={`${path}/home`} exact>
-							<h1>HOME PAGE</h1>
+							<Text
+								fontSize="4xl"
+								fontWeight={'bold'}
+								p={10}
+								pb={0}
+								color={'purple.600'}
+							>
+								Home
+							</Text>
 						</Route>
 						<Route path={`${path}/profile`} exact>
 							<StudentProfileForm />
@@ -32,10 +40,26 @@ export default function Dashboard() {
 							<JobList />
 						</Route>
 						<Route path={`${path}/notifications`} exact>
-							<h1>Notifications</h1>
+							<Text
+								fontSize="4xl"
+								fontWeight={'bold'}
+								p={10}
+								pb={0}
+								color={'purple.600'}
+							>
+								Notifications
+							</Text>
 						</Route>
 						<Route path={`${path}/events`} exact>
-							<h1>Events</h1>
+							<Text
+								fontSize="4xl"
+								fontWeight={'bold'}
+								p={10}
+								pb={0}
+								color={'purple.600'}
+							>
+								Events
+							</Text>
 						</Route>
 						<Route path={`${path}/students`} exact>
 							<Student showProceedBtn={false} />

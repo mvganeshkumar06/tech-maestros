@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import List from '../components/Table';
 import axios from 'axios';
-import { Button, Flex } from '@chakra-ui/react';
+import { Button, Flex, Text } from '@chakra-ui/react';
 import AppContext from '../context/app-context';
 import { Spinner } from '@chakra-ui/react';
 
@@ -67,33 +67,38 @@ export default function Student({ showProceedBtn }) {
 	};
 
 	return (
-		<Flex
-			p="10px"
-			borderRadius="10px"
-			border={'2px solid #ddd'}
-			flexDirection="column"
-			justifyContent={'center'}
-			margin={'auto'}
-			mt={10}
-			mb={20}
-			width="50rem"
-		>
-			{showProceedBtn && (
-				<Button
-					colorScheme="purple"
-					onClick={sendEmail}
-					isLoading={state.isLoading.sendMails}
-					w={'50%'}
-					m={'auto'}
-				>
-					Proceed to Next Round
-				</Button>
-			)}
-			{state.isLoading.getStudents ? (
-				<Spinner size={'xl'} textAlign={'center'} margin={'auto'} />
-			) : (
-				<List data={studentList} />
-			)}
-		</Flex>
+		<>
+			<Text fontSize="4xl" fontWeight={'bold'} p={10} pb={0} color={'purple.600'}>
+				Students
+			</Text>
+			<Flex
+				p="10px"
+				borderRadius="10px"
+				border={'2px solid #ddd'}
+				flexDirection="column"
+				justifyContent={'center'}
+				margin={'auto'}
+				mt={10}
+				mb={20}
+				width="50rem"
+			>
+				{showProceedBtn && (
+					<Button
+						colorScheme="purple"
+						onClick={sendEmail}
+						isLoading={state.isLoading.sendMails}
+						w={'50%'}
+						m={'auto'}
+					>
+						Proceed to Next Round
+					</Button>
+				)}
+				{state.isLoading.getStudents ? (
+					<Spinner size={'xl'} textAlign={'center'} margin={'auto'} />
+				) : (
+					<List data={studentList} />
+				)}
+			</Flex>
+		</>
 	);
 }

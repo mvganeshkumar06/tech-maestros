@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import List from '../components/CollegeTable';
 import axios from 'axios';
-import { Button, Flex } from '@chakra-ui/react';
+import { Button, Flex, Text } from '@chakra-ui/react';
 import AppContext from '../context/app-context';
 import { Spinner } from '@chakra-ui/react';
 
@@ -36,22 +36,27 @@ export default function Colleges() {
 	}, []);
 
 	return (
-		<Flex
-			p="10px"
-			borderRadius="10px"
-			border={'2px solid #ddd'}
-			flexDirection="column"
-			justifyContent={'center'}
-			margin={'auto'}
-			mt={10}
-			mb={20}
-			width="50rem"
-		>
-			{state.isLoading.getColleges ? (
-				<Spinner size={'xl'} textAlign={'center'} margin={'auto'} />
-			) : (
-				<List data={collegeList} />
-			)}
-		</Flex>
+		<>
+			<Text fontSize="4xl" fontWeight={'bold'} p={10} pb={0} color={'purple.600'}>
+				Colleges
+			</Text>
+			<Flex
+				p="10px"
+				borderRadius="10px"
+				border={'2px solid #ddd'}
+				flexDirection="column"
+				justifyContent={'center'}
+				margin={'auto'}
+				mt={10}
+				mb={20}
+				width="50rem"
+			>
+				{state.isLoading.getColleges ? (
+					<Spinner size={'xl'} textAlign={'center'} margin={'auto'} />
+				) : (
+					<List data={collegeList} />
+				)}
+			</Flex>
+		</>
 	);
 }

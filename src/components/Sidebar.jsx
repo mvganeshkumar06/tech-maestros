@@ -1,7 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Flex, Text, IconButton, Divider, Avatar, Heading, ListItem } from '@chakra-ui/react';
 import { FiMenu, FiHome, FiCalendar, FiUser, FiDollarSign } from 'react-icons/fi';
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import { IoBriefcaseOutline } from 'react-icons/io5';
+import { FaGraduationCap } from 'react-icons/fa';
 import { IoPawOutline } from 'react-icons/io5';
+import { MdOutlineEvent } from 'react-icons/md';
 import NavItem from '../components/NavItem';
 import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 import AppContext from '../context/app-context';
@@ -21,15 +25,15 @@ export default function Sidebar() {
 			// 	title: 'Profile',
 			// },
 			{
-				icon: FiDollarSign,
+				icon: IoBriefcaseOutline,
 				title: 'Jobs',
 			},
 			{
-				icon: IoPawOutline,
+				icon: IoMdNotificationsOutline,
 				title: 'Notifications',
 			},
 			{
-				icon: FiDollarSign,
+				icon: MdOutlineEvent,
 				title: 'Events',
 			},
 		],
@@ -48,15 +52,15 @@ export default function Sidebar() {
 				title: 'Students',
 			},
 			{
-				icon: FiDollarSign,
+				icon: IoBriefcaseOutline,
 				title: 'Jobs',
 			},
 			{
-				icon: IoPawOutline,
+				icon: IoMdNotificationsOutline,
 				title: 'Notifications',
 			},
 			{
-				icon: FiDollarSign,
+				icon: MdOutlineEvent,
 				title: 'Events',
 			},
 		],
@@ -71,7 +75,7 @@ export default function Sidebar() {
 			// 	title: 'Profile',
 			// },
 			{
-				icon: FiUser,
+				icon: FaGraduationCap,
 				title: 'Colleges',
 			},
 			{
@@ -79,15 +83,15 @@ export default function Sidebar() {
 				title: 'Students',
 			},
 			{
-				icon: FiDollarSign,
+				icon: IoBriefcaseOutline,
 				title: 'Jobs',
 			},
 			{
-				icon: IoPawOutline,
+				icon: IoMdNotificationsOutline,
 				title: 'Notifications',
 			},
 			{
-				icon: FiDollarSign,
+				icon: MdOutlineEvent,
 				title: 'Events',
 			},
 		],

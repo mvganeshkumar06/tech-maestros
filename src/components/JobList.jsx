@@ -34,22 +34,24 @@ function JobList() {
 		},
 	];
 	return (
-		<Flex flexDirection={'column'} gap={'20px'} alignItems="center" m="1rem 0">
-			<Text fontSize="4xl" fontWeight={700} lineHeight={'22px'} color="purple.500" m="20px 0">
+		<>
+			<Text fontSize="4xl" fontWeight={'bold'} p={10} pb={0} color={'purple.600'}>
 				Apply for Jobs
 			</Text>
-			{list.map(({ name, imgUrl, industry, location, role }) => {
-				return (
-					<JobListItem
-						name={name}
-						source={imgUrl}
-						industry={industry}
-						location={location}
-						role={role}
-					/>
-				);
-			})}
-		</Flex>
+			<Flex flexDirection={'column'} gap={'20px'} alignItems="center" m="1rem 0">
+				{list.map(({ name, imgUrl, industry, location, role }) => {
+					return (
+						<JobListItem
+							name={name}
+							source={imgUrl}
+							industry={industry}
+							location={location}
+							role={role}
+						/>
+					);
+				})}
+			</Flex>
+		</>
 	);
 }
 
